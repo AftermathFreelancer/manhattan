@@ -1,7 +1,7 @@
 <template lang="pug">
 .wrapper
 	.header
-		input(type='text', v-model="state.systemName").title
+		input(type='text', v-model="state.systemName" v-on:input="changeTitle").title
 		h6 ( {{ state.id }} )
 	.map(v-on:changeTool="changeTool")
 		toolbar(:selectedTool="state.selectedTool")
@@ -34,6 +34,10 @@ let store = {
 		selectedItem: null,
 		solars: [],
 		lanes: []
+	},
+
+	changeTitle() {
+		window.document.title = this.state.systemName;
 	},
 
 	changeTool(tool) {
@@ -195,6 +199,10 @@ export default {
 	methods: {
 		changeTool(tool) {
 			store.changeTool(tool)
+		},
+
+		changeTitle() {
+			store.changeTitle()
 		}
 	},
 	mounted: function() {
